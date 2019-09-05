@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test page</title>
+    <script src="jquery-1.10.1.js"></script>
+    <script src="loading.js"></script>
+    <link rel="stylesheet" href="loading.css" />
+    <script>
+        $(function () {
+            var dblclick = $('#dblclick');
+            $('#click').click(function () {
+                dblclick.after('<label class="click"> click </label>');
+            });
+            $('#jsclick').click(function () {
+                dblclick.after('<label class="jsclick"> jsclick </label>');
+            });
+            $('#rightclick').contextmenu(function () {
+                dblclick.after('<label class="rightclick"> rightclick </label>');
+                return false;
+            });
+            dblclick.dblclick(function () {
+                dblclick.after('<label class="dblclick"> dblclick </label>');
+            });
+
+            var img1 = $('#img1');
+            img1.mouseover(function () {
+                img1.attr('class', 'browser safari');
+                img1.attr('src', 'pic/browser_safari.png');
+            });
+            img1.mouseout(function () {
+                img1.attr('class', 'browser ie');
+                img1.attr('src', 'pic/browser_ie.png');
+            });
+            $('#file').change(function () {
+                var fileObj = $('#file')[0].files[0];
+                var imgUrl = window.URL.createObjectURL(fileObj);
+                var img4 = $('#img4');
+                img4.attr('src', imgUrl);
+                img4.css('display', 'block');
+                img4.addClass(fileObj.name);
+            });
+
+            var show_something = $('#show-something');
+            var hide_something = $('#hide-something');
+            $('#show').click(function () {
+                if (show_something.css('display') === 'block') {
+                    return;
+                }
+                addLoadingMask();
+                setTimeout(function () {
+                    removeMask();
+                    show_something.css('display', 'block');
+                }, 2000);
+            });
+            $('#hide').click(function () {
+                if (hide_something.css('display') === 'none') {
+                    return;
+                }
+                addLoadingMask();
+                setTimeout(function () {
+                    removeMask();
+                    hide_something.css('display', 'none');
+                }, 2000);
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <!-- input -->
+    <div class="input">
+        <!-- form -->
+        <form id="form" action="">
+            <!-- text -->
+            <h3>text:</h3>
+            <input type="text" id="text" name="text" value="text" />
+            <input disabled type="text" id="disabled" value="disabled" />
+            <!-- password -->
+            <h3>password:</h3>
+            <input type="password" id="password" name="password" />
+            <h3>submit & reset:</h3>
+            <input id="submit" type="submit" value="Submit" class="button" />
+            <input id="reset" type="reset" value="Reset" class="button">
+        </form>
+        <!-- input button -->
+        <label for="click">
+            <h3>input button</h3>
+            <input type="button" class="button" id="click" value="click" />
+            <input type="button" class="button" id="rightclick" value="rightclick" />
+            <input type="button" class="button" id="jsclick" value="jsclick" />
+            <input type="button" class="button" id="dblclick" value="dblclick" />
+        </label>
+        <!-- file -->
+        <label for="file">
+            <h3>file:</h3>
+            <input id="file" type="file" />
+            <input type="image" alt="browser" id="img4" class="browser" src="pic/browser.png"
+                style="display: none;margin: 5px;" />
+        </label>
+        <!-- checkbox -->
+        <label for="checkbox1">
+            <h3>checkbox:</h3>
+            <input id="checkbox1" type="checkbox" checked />
+            <span>checkbox1</span>
+            <input id="checkbox2" type="checkbox" />
+            <span>checkbox2</span>
+        </label>
+        <!-- radio group -->
+        <label for="radio">
+            <h3>radio:</h3>
+            <input value="1" id="radio" name="radio" type="radio" checked />
+            <span>radio1</span>
+            <input value="2" name="radio" type="radio" />
+            <span>radio2</span>
+            <input value="3" name="radio" type="radio" />
+            <span>radio3</span>
+        </label>
+        <!-- input image -->
+        <label for="img1">
+            <h3>input image:</h3>
+            <input type="image" alt="browser" id="img1" class="browser ie" src="pic/browser_ie.png" />
+            <input type="image" alt="browser" id="img2" class="browser chrome" src="pic/browser_chrome.png" />
+            <input type="image" alt="browser" id="img3" class="browser firefox" src="pic/browser_firefox.png" />
+        </label>
+        <label for="hidden">
+            <h3>hidden:</h3>
+            <input type="hidden" id="hidden" name="hidden" value="hidden" />
+            <input type="text" id="display" style="display: none;" />
+        </label>
+    </div>
+    <!-- textarea -->
+    <label for="textarea">
+        <h3>textarea:</h3>
+        <textarea name="textarea" id="textarea" cols="30" rows="3"></textarea>
+    </label>
+    <!-- button -->
+    <label for="show">
+        <h3>button:</h3>
+        <button id="show" class="button">show</button>
+        <button id="hide" class="button">hide</button>
+        <span id="show-something" style="display: none;">show something</span>
+        <span id="hide-something" style="display: block;">hide something</span>
+    </label>
+    <!-- select -->
+    <label for="select">
+        <h3>select:</h3>
+        <select id="select" name="select" class="select">
+            <option value="1" selected="selected">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+            <option value="4" disabled="disabled"> Option 4</option>
+        </select>
+    </label>
+    <!-- link -->
+    <label for="link">
+        <h3>link:</h3>
+        <a id="link" href="http://">link1</a>
+        <a href="" target="_blank" id="mouseover">mouse over page</a>
+    </label>
+</body>
+
+</html>
