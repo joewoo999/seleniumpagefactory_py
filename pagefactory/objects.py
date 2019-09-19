@@ -5,3 +5,4 @@ def require_not_none(obj, raise_msg: str = None) -> bool:
         return False
     else:
         raise ReferenceError(raise_msg)
+

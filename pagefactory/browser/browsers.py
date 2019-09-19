@@ -181,7 +181,6 @@ class Firefox(Browser):
     def start(self):
         options = webdriver.FirefoxOptions()
         options.headless = self._config.headless
-
         if self._config.download_directory is not None:
             options.set_preference("browser.download.useDownloadDir", True)
             options.set_preference("browser.download.folderList", 2)
@@ -198,3 +197,9 @@ class InternetExplorer(Browser):
 
     def start(self):
         self._driver = webdriver.Ie()
+
+
+if __name__ == '__main__':
+    d = webdriver.Ie()
+    d.get('http://www.baidu.com')
+    d.quit()
